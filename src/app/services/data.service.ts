@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment';
+import { environment } from './../../environments/environment.dev';
 import { AppError } from './../common/app-error';
 import { BadInput } from './../common/bad-input';
 import { Http } from '@angular/http';
@@ -9,11 +9,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { NotFoundError } from '../common/not-found-error';
 
+
 @Injectable()
 export class DataService {
 
-     newURL: string;
-     key: string = process.env.API_KEY;
+    newURL: string;
+    key = environment.apiUrl;
 
     constructor(private url: string, private http: Http) { }
 

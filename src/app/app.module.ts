@@ -1,6 +1,8 @@
+import { AppErrorHandler } from './common/app-error-handler';
+import { PostService } from './services/post.service';
 import { LocalComponent } from './local/local.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,24 +16,24 @@ import { PlacesApiComponent } from './places-api/places-api.component';
 
 const appRoutes: Routes = [
   {
+    path: '',
+    component: LandingComponent
+  },
+  {
     path: 'local',
-    component: LocalComponent,
-    data: { title: 'Local' }
+    component: LocalComponent
   },
   {
     path: 'login',
-    component: LoginComponent,
-    data: { title: 'Login' }
-  },
+    component: LoginComponent
+    },
   {
     path: 'signup',
-    component: SignupComponent,
-    data: { title: 'Sign Up' }
+    component: SignupComponent
   },
   {
     path: 'local/business',
-    component: BusinessComponent,
-    data: { title: 'Business' }
+    component: BusinessComponent
   },
   {
     path: '',
@@ -55,11 +57,10 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- for debugging
+      appRoutes
     )
   ],
-  providers: [],
+  providers: [PostService, { provide: ErrorHandler, useClass: AppErrorHandler}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

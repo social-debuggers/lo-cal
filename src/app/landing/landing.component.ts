@@ -1,3 +1,4 @@
+import { PostService } from './../services/post.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  results: any[];
+  formData = {
+    input: ''
+  };
 
-  constructor() { }
+  constructor(private service: PostService) { }
 
   ngOnInit() {
   }
 
+  ngSubmit() {
+    this.service.getAll(this.formData.input).subscribe(res => this.results = res);
+    console.log(this.results);
+  }
 }

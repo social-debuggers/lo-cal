@@ -36,6 +36,7 @@
     "popper.js": "^1.14.1",
     "rxjs": "^5.5.6",
     "serve-favicon": "^2.4.5",
+    "yargs": "^11.0.0",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

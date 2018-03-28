@@ -11,7 +11,7 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
   loginData = { username: '', password: '' }; // holds the login data
   message = '';
   data: any;
@@ -20,11 +20,8 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private router: Router) { }
 
-  ngOnInit() {
-  }
-
   login() {
-    this.http.post('/local/signin', this.loginData).subscribe(resp => {
+    this.http.post('/login', this.loginData).subscribe(resp => {
       this.data = resp;
       localStorage.setItem('jwtToken', this.data.token);
       this.router.navigate(['local']);

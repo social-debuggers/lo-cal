@@ -10,17 +10,16 @@ import { of } from 'rxjs/observable/of';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   signupData = { username: '', password: '' };
   message = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
 
   signup() {
-    this.http.post('/local/signup', this.signupData)
+    this.http.post('/signup', this.signupData)
     .subscribe(resp => {  // resp=response
       console.log(resp);
       this.router.navigate(['login']);

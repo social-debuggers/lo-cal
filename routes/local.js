@@ -9,17 +9,19 @@ var User = require("../models/user");
 var Business = require("../models/business");
 
 router.get('/', function (req, res, next) {
-    res.send('Express RESTful App');
+    res.render('landing');
 });
 
 router.get('/local', function(req, res, next) {
     res.render('local');
 })
 
+
+// SIGN-UP ROUTE
 router.post('/signup', function (req, res) {
     if (!req.body.username || !req.body.password) {
         res.json({ success: false, msg: 'Please pass username and password.' });
-    } else {
+    } else { ///Sign up a new user
         var newUser = new User({
             username: req.body.username,
             password: req.body.password
@@ -34,11 +36,14 @@ router.post('/signup', function (req, res) {
     }
 });
 
-router.post('/signin', function (req, res) {
+// LOGIN ROUTE: 
+router.post('/login', function (req, res) {
     User.findOne({
         username: req.body.username
-    }, function (err, user) {
+    }, 
+    function (err, user) {
         if (err) throw err;
+        console.log(err); 
         if (!user) {
             res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
         } else {
@@ -57,8 +62,8 @@ router.post('/signin', function (req, res) {
     });
 });
 
-//only allows users logged in to add new business
-router.post('/business', passport.authenticate('jwt', { session: false }), function (req, res) {
+// MIDDLEWARE AUTH   --only allows users logged in to add new business
+router.post('/local/business', passport.authenticate('jwt', { session: false }), function (req, res) {
     var token = getToken(req.headers);
     if (token) {
         console.log(req.body);
@@ -67,7 +72,7 @@ router.post('/business', passport.authenticate('jwt', { session: false }), funct
             address: req.body.address,
             story: req.body.story
         });
-
+        ///** TODO: BUILD OUT HTML FORM */
         newBusiness.save(function (err) {
             if (err) {
                 return res.json({ success: false, msg: 'Save business model failed.' });
@@ -79,8 +84,8 @@ router.post('/business', passport.authenticate('jwt', { session: false }), funct
     }
 });
 
-//Gets list of business's for any given user
-router.get('/business', passport.authenticate('jwt', { session: false }), function (req, res) {
+// MIDDLEWARE:  Gets list of business's for any given user
+router.get('/local/business', passport.authenticate('jwt', { session: false }), function (req, res) {
     var token = getToken(req.headers);
     if (token) {
         Business.find(function (err, business) {

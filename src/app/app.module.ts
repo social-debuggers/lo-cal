@@ -9,17 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BusinessComponent } from './business/business.component';
+import { LandingComponent } from './landing/landing.component';
+import { PlacesApiComponent } from './places-api/places-api.component';
 
 const appRoutes: Routes = [
   {
     path: 'local',
     component: LocalComponent,
     data: { title: 'Local' }
-  },
-  {
-    path: 'business',
-    component: BusinessComponent,
-    data: { title: 'Business' }
   },
   {
     path: 'login',
@@ -32,8 +29,13 @@ const appRoutes: Routes = [
     data: { title: 'Sign Up' }
   },
   {
+    path: 'local/business',
+    component: BusinessComponent,
+    data: { title: 'Business' }
+  },
+  {
     path: '',
-    redirectTo: '/local',
+    redirectTo: '/',
     pathMatch: 'full'
   }
 ];
@@ -44,7 +46,9 @@ const appRoutes: Routes = [
     LoginComponent,
     SignupComponent,
     BusinessComponent,
-    LocalComponent
+    LocalComponent,
+    LandingComponent,
+    PlacesApiComponent
   ],
   imports: [
     BrowserModule,

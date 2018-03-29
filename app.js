@@ -21,6 +21,7 @@ app.use(passport.initialize());
 app.use('/local', local);
 
 //create a connection to mongoDB
+mongoose.connect('mongodb://localhost/lo-cal')
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, {
     promiseLibrary: require('bluebird')

@@ -14,12 +14,12 @@ import { NotFoundError } from '../common/not-found-error';
 export class DataService {
 
     newURL: string;
-    key = environment.apiUrl;
+    key = environment.map3ApiUrl;
 
     constructor(private url: string, private http: Http) { }
 
     getAll(value: string) {
-         this.newURL = this.url + value + this.key;
+         this.newURL = this.url + value + '&key=' + this.key;
          console.log(this.newURL);
         return this.http.get(this.newURL)
             .map(response => response.json())

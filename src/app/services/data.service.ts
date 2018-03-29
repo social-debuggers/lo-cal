@@ -12,15 +12,14 @@ import { NotFoundError } from '../common/not-found-error';
 @Injectable()
 export class DataService {
 
-    newURL: string;
-    key = 'AIzaSyAb-tt9qfdLheaw7_dXt_Fd9OnBjVj5EAI';
+    key = 'AIzaSyBSTTLyNkZL7s7XeGMlx6ziJK8nAWksZ44';
 
     constructor(private url: string, private http: Http) { }
 
     getAll(value: string) {
-         this.newURL = this.url + value + '&key=' + this.key;
-         console.log(this.newURL);
-        return this.http.get(this.newURL)
+         const newURL: string = this.url + value + '&key=' + this.key;
+         console.log(newURL);
+        return this.http.get(newURL)
             .map(response => response.json())
             .catch(this.handleError);
     }

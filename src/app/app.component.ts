@@ -1,4 +1,3 @@
-import { environment } from './../environments/environment.dev';
 import { Component } from '@angular/core';
 
 @Component({

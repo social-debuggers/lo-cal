@@ -1,4 +1,3 @@
-import { environment } from './../../environments/environment.dev';
 import { AppError } from './../common/app-error';
 import { BadInput } from './../common/bad-input';
 import { Http } from '@angular/http';
@@ -14,7 +13,7 @@ import { NotFoundError } from '../common/not-found-error';
 export class DataService {
 
     newURL: string;
-    key = environment.map2ApiUrl;
+    key = 'AIzaSyAb-tt9qfdLheaw7_dXt_Fd9OnBjVj5EAI';
 
     constructor(private url: string, private http: Http) { }
 

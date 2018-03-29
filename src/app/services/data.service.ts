@@ -3,7 +3,7 @@ import { AppError } from './../common/app-error';
 import { BadInput } from './../common/bad-input';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -14,7 +14,7 @@ import { NotFoundError } from '../common/not-found-error';
 export class DataService {
 
     newURL: string;
-    key = environment.map3ApiUrl;
+    key = environment.map2ApiUrl;
 
     constructor(private url: string, private http: Http) { }
 

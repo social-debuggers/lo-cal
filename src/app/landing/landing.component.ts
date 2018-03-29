@@ -10,16 +10,13 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./landing.component.css']
 })
 
-export class LandingComponent implements OnInit {
+export class LandingComponent  {
   results: any[];
   formData = {
     input: ''
   };
 
   constructor(private service: PostService) { }
-
-  ngOnInit() {
-  }
 
   onSubmit() {
     this.service.getAll(this.formData.input).subscribe(res => this.results = res);

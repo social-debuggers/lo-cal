@@ -22,7 +22,7 @@ export class SignupComponent {
     this.http.post('/signup', this.signupData)
     .subscribe(resp => {  // resp=response
       console.log(resp);
-      this.router.navigate(['login']);
+      this.router.navigate(['signup']);
     }, err => { // else return the error message to the var above for error handeling
       this.message = err.error.msg;
     });

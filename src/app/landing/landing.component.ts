@@ -11,7 +11,7 @@ import { of } from 'rxjs/observable/of';
 })
 
 export class LandingComponent  {
-  results: any[];
+  results;
   formData = {
     input: ''
   };

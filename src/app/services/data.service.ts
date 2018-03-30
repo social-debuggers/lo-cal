@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { AppError } from './../common/app-error';
 import { BadInput } from './../common/bad-input';
-import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -12,16 +12,17 @@ import { NotFoundError } from '../common/not-found-error';
 @Injectable()
 export class DataService {
 
+    newURL: string;
     key = 'AIzaSyBSTTLyNkZL7s7XeGMlx6ziJK8nAWksZ44';
 
-    constructor(private url: string, private http: Http) { }
+    constructor(private url: string, private http: HttpClient) { }
 
     getAll(value: string) {
-         const newURL: string = this.url + value + '&key=' + this.key;
-         console.log(newURL);
-        return this.http.get(newURL)
-            .map(response => response.json())
-            .catch(this.handleError);
+         this.newURL = this.url + value + '&key=' + this.key;
+         console.log(this.newURL);
+        return this.http.get(this.newURL);
+            // .map(response => response.json())
+            // .catch(this.handleError);
     }
 
     create(resource) {
@@ -32,15 +33,15 @@ export class DataService {
     }
 
     update(resource) {
-        return this.http.patch(this.url + '/' + resource.id, JSON.stringify({ isRead: true }))
-            .map(response => response.json())
-            .catch(this.handleError);
+        return this.http.patch(this.url + '/' + resource.id, JSON.stringify({ isRead: true }));
+            // .map(response => response.json())
+            // .catch(this.handleError);
     }
 
     delete(id) {
-        return this.http.delete(this.url + '/' + id)
-            .map(response => response.json())
-            .catch(this.handleError);
+        return this.http.delete(this.url + '/' + id);
+            // .map(response => response.json())
+            // .catch(this.handleError);
     }
 
     private handleError(error: Response) {

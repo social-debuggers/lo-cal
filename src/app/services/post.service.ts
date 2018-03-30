@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { AppError } from './../common/app-error';
 import { BadInput } from './../common/bad-input';
-import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/observable';
 import 'rxjs/add/observable/throw';
@@ -10,7 +10,7 @@ import { DataService } from './data.service';
 
 @Injectable()
 export class PostService extends DataService {
-  constructor(http: Http) {
+  constructor(http: HttpClient) {
     super(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=`, http);
   }
 }

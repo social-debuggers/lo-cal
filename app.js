@@ -12,15 +12,7 @@ var local = require('./routes/local');
 var business = require ('./routes/business');
 var app = express();
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ 'extended': 'false' }));
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/local', express.static(path.join(__dirname, 'dist')));
-app.use(passport.initialize());
-app.use('/local', local);
-
-//create a connection to mongoDB
+// create a connection to mongoDB
 mongoose.connect('mongodb://localhost/lo-cal')
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, {
@@ -28,6 +20,15 @@ mongoose.connect(config.database, {
 })
     .then(() => console.log('connection succesful'))
     .catch((err) => console.error(err));
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ 'extended': 'false' }));
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/business', express.static(path.join(__dirname, 'dist')));
+app.use(passport.initialize());
+//app.use('/local', local);
+app.use('/business', business);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

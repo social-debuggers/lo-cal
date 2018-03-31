@@ -21,7 +21,7 @@ export class LoginComponent  {
     private router: Router) { }
 
   login() {
-    this.http.post('/login', this.loginData).subscribe(resp => {
+    this.http.post('/api/login', this.loginData).subscribe(resp => {
       this.data = resp;
       localStorage.setItem('jwtToken', this.data.token);
       this.router.navigate(['local']);

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-signup',
@@ -19,10 +21,10 @@ export class SignupComponent {
     private router: Router) { }
 
   signup() {
-    this.http.post('/signup', this.signupData)
+    this.http.post('signup', this.signupData)
     .subscribe(resp => {  // resp=response
       console.log(resp);
-      this.router.navigate(['signup']);
+      this.router.navigate(['login']);
     }, err => { // else return the error message to the var above for error handeling
       this.message = err.error.msg;
     });

@@ -21,7 +21,7 @@ export class BusinessComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('/local/business', httpOptions)
+    this.http.get('/business', httpOptions)
     .subscribe(data => {
       this.business = data;
       console.log(this.business);

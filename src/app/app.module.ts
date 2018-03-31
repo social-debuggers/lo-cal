@@ -1,3 +1,4 @@
+import { BusinessDetailComponent } from './business-detail/business-detail.component';
 import { AppErrorHandler } from './common/app-error-handler';
 import { PostService } from './services/post.service';
 import { LocalComponent } from './local/local.component';
@@ -14,6 +15,8 @@ import { BusinessComponent } from './business/business.component';
 import { LandingComponent } from './landing/landing.component';
 import { PlacesApiComponent } from './places-api/places-api.component';
 import { HttpModule } from '@angular/http';
+import { BusinessCreateComponent } from './business-create/business-create.component';
+import { BusinessEditComponent } from './business-edit/business-edit.component';
 
 const appRoutes: Routes = [
   {
@@ -33,8 +36,24 @@ const appRoutes: Routes = [
     component: SignupComponent
   },
   {
-    path: 'local/business',
-    component: BusinessComponent
+    path: 'business',
+    component: BusinessComponent,
+    data: { title: 'Business List' }
+  },
+  {
+    path: 'business-detail/:id',
+    component: BusinessDetailComponent,
+    data: { title: 'Business Details' }
+  },
+  {
+    path: 'business-create',
+    component: BusinessCreateComponent,
+    data: { title: 'Create Business' }
+  },
+  {
+    path: 'business-edit/:id',
+    component: BusinessEditComponent,
+    data: { title: 'Edit Business' }
   },
   {
     path: '**',
@@ -50,7 +69,9 @@ const appRoutes: Routes = [
     BusinessComponent,
     LocalComponent,
     LandingComponent,
-    PlacesApiComponent
+    PlacesApiComponent,
+    BusinessCreateComponent,
+    BusinessEditComponent
   ],
   imports: [
     BrowserModule,

@@ -27,7 +27,7 @@ router.post('/signup', function (req, res) {
             password: req.body.password
         });
         // save the user
-        newUser.save(function (err) {
+        newUser.save(function(err) {
             if (err) {
                 return res.json({ success: false, msg: 'Username already exists.' });
             }
@@ -61,54 +61,5 @@ router.post('/login', function (req, res) {
         }
     });
 });
-
-// MIDDLEWARE AUTH   --only allows users logged in to add new business
-router.post('/local/business', passport.authenticate('jwt', { session: false }), function (req, res) {
-    var token = getToken(req.headers);
-    if (token) {
-        console.log(req.body);
-        var newBusiness = new Business({
-            title: req.body.title,
-            address: req.body.address,
-            story: req.body.story
-        });
-        ///** TODO: BUILD OUT HTML FORM */
-        newBusiness.save(function (err) {
-            if (err) {
-                return res.json({ success: false, msg: 'Save business model failed.' });
-            }
-            res.json({ success: true, msg: 'Successfully created new busine$$.' });
-        });
-    } else {
-        return res.status(403).send({ success: false, msg: 'Unauthorized.' });
-    }
-});
-
-// MIDDLEWARE:  Gets list of business's for any given user
-router.get('/local/business', passport.authenticate('jwt', { session: false }), function (req, res) {
-    var token = getToken(req.headers);
-    if (token) {
-        Business.find(function (err, business) {
-            if (err) return next(err);
-            res.json(business);
-        });
-    } else {
-        return res.status(403).send({ success: false, msg: 'Unauthorized User.' });
-    }
-});
-
-//parses authorization token form request headers
-getToken = function (headers) {
-    if (headers && headers.authorization) {
-        var parted = headers.authorization.split(' ');
-        if (parted.length === 2) {
-            return parted[1];
-        } else {
-            return null;
-        }
-    } else {
-        return null;
-    }
-};
 
 module.exports = router;

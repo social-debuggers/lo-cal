@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Business = require('../models/business');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
 /* GET ALL Business */
 router.get('/', function (req, res, next) {
@@ -9,7 +11,9 @@ router.get('/', function (req, res, next) {
         if (err) return next(err);
         res.json(products);
     });
+
 });
+
 
 /* GET SINGLE BUSINESS BY ID */
 router.get('/:id', function (req, res, next) {
@@ -43,53 +47,100 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
-// MIDDLEWARE AUTH   --only allows users logged in to add new business
-router.post('/', passport.authenticate('jwt', { session: false }), function (req, res) {
-    var token = getToken(req.headers);
-    if (token) {
-        console.log(req.body);
-        var newBusiness = new Business({
-            title: req.body.title,
-            address: req.body.address,
-            story: req.body.story
+
+////// SIGN UP & LOGIN ////////
+// SIGN-UP ROUTE
+router.post('/signup', function (req, res) {
+    if (!req.body.username || !req.body.password) {
+        res.json({ success: false, msg: 'Please pass username and password.' });
+    } else { ///Sign up a new user
+        var newUser = new User({
+            username: req.body.username,
+            password: req.body.password
         });
-        ///** TODO: BUILD OUT HTML FORM */
-        newBusiness.save(function (err) {
+        // save the user
+        newUser.save(function (err) {
             if (err) {
-                return res.json({ success: false, msg: 'Save business model failed.' });
+                return res.json({ success: false, msg: 'Username already exists.' });
             }
-            res.json({ success: true, msg: 'Successfully created new busine$$.' });
+            res.json({ success: true, msg: 'Successful created new user.' });
         });
-    } else {
-        return res.status(403).send({ success: false, msg: 'Unauthorized.' });
     }
 });
 
-// MIDDLEWARE:  Gets list of business's for any given user
-router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
-    var token = getToken(req.headers);
-    if (token) {
-        Business.find(function (err, business) {
-            if (err) return next(err);
-            res.json(business);
+// LOGIN ROUTE: 
+router.post('/login', function (req, res) {
+    User.findOne({
+        username: req.body.username
+    },
+        function (err, user) {
+            if (err) throw err;
+            console.log(err);
+            if (!user) {
+                res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+            } else {
+                // checks if the password matches
+                user.comparePassword(req.body.password, function (err, isMatch) {
+                    if (isMatch && !err) {
+                        // if user is found and password is right then create a token
+                        var token = jwt.sign(user.toJSON(), config.secret);
+                        // return the information including token as JSON
+                        res.json({ success: true, token: 'JWT ' + token });
+                    } else {
+                        res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+                    }
+                });
+            }
         });
-    } else {
-        return res.status(403).send({ success: false, msg: 'Unauthorized User.' });
-    }
 });
 
-//parses authorization token form request headers
-getToken = function (headers) {
-    if (headers && headers.authorization) {
-        var parted = headers.authorization.split('');
-        if (parted.length === 2) {
-            return parted[1];
-        } else {
-            return null;
-        }
-    } else {
-        return null;
-    }
-};
+// MIDDLEWARE AUTH   --only allows users logged in to add new business
+// router.post('/', passport.authenticate('jwt', { session: false }), function (req, res) {
+//     var token = getToken(req.headers);
+//     if (token) {
+//         console.log(req.body);
+//         var newBusiness = new Business({
+//             title: req.body.title,
+//             address: req.body.address,
+//             story: req.body.story
+//         });
+//         ///** TODO: BUILD OUT HTML FORM */
+//         newBusiness.save(function (err) {
+//             if (err) {
+//                 return res.json({ success: false, msg: 'Save business model failed.' });
+//             }
+//             res.json({ success: true, msg: 'Successfully created new busine$$.' });
+//         });
+//     } else {
+//         return res.status(403).send({ success: false, msg: 'Unauthorized.' });
+//     }
+// });
+
+// // MIDDLEWARE:  Gets list of business's for any given user
+// router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
+//     var token = getToken(req.headers);
+//     if (token) {
+//         Business.find(function (err, business) {
+//             if (err) return next(err);
+//             res.json(business);
+//         });
+//     } else {
+//         return res.status(403).send({ success: false, msg: 'Unauthorized User.' });
+//     }
+// });
+
+// //parses authorization token form request headers
+// getToken = function (headers) {
+//     if (headers && headers.authorization) {
+//         var parted = headers.authorization.split('');
+//         if (parted.length === 2) {
+//             return parted[1];
+//         } else {
+//             return null;
+//         }
+//     } else {
+//         return null;
+//     }
+// };
 
 module.exports = router;

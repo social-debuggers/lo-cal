@@ -30,11 +30,22 @@ app.use(passport.initialize());
 //app.use('/local', local);
 app.use('/business', business);
 
+///////// Sends all other requests to the Angular app
+app.get('*', function (req, res, next) {
+    res.sendFile('dist/index.html', { root: __dirname });
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+
+// ALLOS CORS in express!! 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
 // error handler
@@ -45,7 +56,7 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.json({error:err});
 });
 
 module.exports = app;

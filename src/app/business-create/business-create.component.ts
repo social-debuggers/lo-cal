@@ -16,7 +16,7 @@ export class BusinessCreateComponent implements OnInit {
   }
 
   saveBusiness() {
-    this.http.post('/business', this.business)
+   this.business = this.http.post('/business', this.business)
       .subscribe(res => {
         const id = res['_id'];
         this.router.navigate(['/business-details', id]);

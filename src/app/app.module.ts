@@ -33,7 +33,8 @@ const appRoutes: Routes = [
     },
   {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    data: { title: 'Sign Up' }
   },
   {
     path: 'business',
@@ -73,7 +74,7 @@ const appRoutes: Routes = [
     BusinessCreateComponent,
     BusinessEditComponent,
     BusinessDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

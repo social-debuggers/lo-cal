@@ -14,9 +14,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BusinessComponent } from './business/business.component';
 import { LandingComponent } from './landing/landing.component';
 import { PlacesApiComponent } from './places-api/places-api.component';
-import { HttpModule } from '@angular/http';
 import { BusinessCreateComponent } from './business-create/business-create.component';
 import { BusinessEditComponent } from './business-edit/business-edit.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -57,7 +57,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/'
+    component: NotFoundComponent
   }
 ];
 
@@ -71,12 +71,13 @@ const appRoutes: Routes = [
     LandingComponent,
     PlacesApiComponent,
     BusinessCreateComponent,
-    BusinessEditComponent
+    BusinessEditComponent,
+    BusinessDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes

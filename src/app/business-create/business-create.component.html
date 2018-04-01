@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
           <label for="name">Story</label>
-          <input type="number" class="form-control" [(ngModel)]="business.story" name="published_year" required>
+          <input type="text" class="form-control" [(ngModel)]="business.story" name="story" required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!businessForm.form.valid">Save</button>

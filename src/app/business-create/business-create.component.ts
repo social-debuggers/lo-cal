@@ -19,7 +19,7 @@ export class BusinessCreateComponent implements OnInit {
    this.business = this.http.post('/business', this.business)
       .subscribe(res => {
         const id = res['_id'];
-        this.router.navigate(['/business-details', id]);
+        this.router.navigate(['/business-detail', id]);
       }, (err) => {
         console.log(err);
       }

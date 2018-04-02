@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add New Business</h1>
+  <h1>Edit Business</h1>
   <div class="row">
     <div class="col-md-6">
       <form (ngSubmit)="updateBusiness()" #businessForm="ngForm">
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
           <label for="name">Story</label>
-          <input type="number" class="form-control" [(ngModel)]="business.story" name="published_year" required>
+          <input type="text" class="form-control" [(ngModel)]="business.story" name="story" required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!businessForm.form.valid">Save</button>

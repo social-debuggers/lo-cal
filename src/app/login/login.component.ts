@@ -21,10 +21,10 @@ export class LoginComponent  {
     private router: Router) { }
 
   login() {
-    this.http.post('/api/login', this.loginData).subscribe(resp => {
+    this.http.post('/login', this.loginData).subscribe(resp => {
       this.data = resp;
       localStorage.setItem('jwtToken', this.data.token);
-      this.router.navigate(['local']);
+      this.router.navigate(['business']);
     }, err => {
       this.message = err.error.msg;
     });

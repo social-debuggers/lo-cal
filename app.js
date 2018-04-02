@@ -1,19 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
 
-var morgan = require('morgan');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var config = require('./config/database');
-var local = require('./routes/local');
-var business = require ('./routes/business');
-var app = express();
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const config = require('./config/database');
+const local = require('./routes/local');
+const business = require ('./routes/business');
+const app = express();
 
 // create a connection to mongoDB
-mongoose.connect('mongodb://localhost/lo-cal')
+mongoose.connect('mongodb://localhost:27017/lo-cal')
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, {
     promiseLibrary: require('bluebird')
@@ -21,22 +21,25 @@ mongoose.connect(config.database, {
     .then(() => console.log('connection succesful'))
     .catch((err) => console.error(err));
 
+
 app.use(logger('dev'));
+// Parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ 'extended': 'false' }));
+// Angular DIST output folder.. looks for path of dist. 
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/business', express.static(path.join(__dirname, 'dist')));
 app.use(passport.initialize());
-//app.use('/local', local);
 app.use('/business', business);
+app.use('/', local);
 
 ///////// Sends all other requests to the Angular app
 app.get('*', function (req, res, next) {
     res.sendFile('dist/index.html', { root: __dirname });
 });
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

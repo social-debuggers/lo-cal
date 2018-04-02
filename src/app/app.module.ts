@@ -1,31 +1,26 @@
-import { BusinessDetailComponent } from './business-detail/business-detail.component';
+import { NotFoundComponent } from './common/not-found/not-found.component';
+import { BusinessEditComponent } from './business/components/business-edit/business-edit.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { BusinessDetailComponent } from './business/components/business-detail/business-detail.component';
+import { BusinessComponent } from './business/components/business-component/business.component';
+import { BusinessCreateComponent } from './business/components/business-create/business-create.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
 import { AppErrorHandler } from './common/app-error-handler';
 import { PostService } from './services/post.service';
-import { LocalComponent } from './local/local.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { RouterModule, Routes } from '@angular/router';
-import { BusinessComponent } from './business/business.component';
 import { LandingComponent } from './landing/landing.component';
 import { PlacesApiComponent } from './places-api/places-api.component';
-import { BusinessCreateComponent } from './business-create/business-create.component';
-import { BusinessEditComponent } from './business-edit/business-edit.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: LandingComponent
-  },
-  {
-    path: 'local',
-    component: LocalComponent
   },
   {
     path: 'login',
@@ -68,7 +63,6 @@ const appRoutes: Routes = [
     LoginComponent,
     SignupComponent,
     BusinessComponent,
-    LocalComponent,
     LandingComponent,
     PlacesApiComponent,
     BusinessCreateComponent,

@@ -13,4 +13,5 @@ export class PostService extends DataService {
   constructor(http: HttpClient) {
     super(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=`, http);
   }
+
 }

@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
-var config = require('../config/database');
-require('../config/passport')(passport);
+var config = require('../auth/config/database');
+require('../auth/config/passport')(passport);
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
-var User = require("../models/user");
-var Business = require("../models/business");
+var User = require("../auth/models/User");
+var Business = require("../business/models/Business");
 
 router.get('/', function (req, res, next) {
     res.render('landing');

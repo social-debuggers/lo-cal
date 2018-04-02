@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Business = require('../models/business');
+var Business = require('../business/models/Business');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 

@@ -7,9 +7,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('./config/database');
-const local = require('./routes/local');
-const business = require ('./routes/business');
+const config = require('./src/app/auth/config/database');
+const auth = require('./src/app/routes/local');
+const business = require ('./src/app/routes/business');
 const app = express();
 
 // create a connection to mongoDB
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ 'extended': 'false' }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(passport.initialize());
 app.use('/business', business);
-app.use('/', local);
+app.use('/', auth);
 
 ///////// Sends all other requests to the Angular app
 app.get('*', function (req, res, next) {

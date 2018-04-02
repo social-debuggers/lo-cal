@@ -17,7 +17,7 @@ export class BusinessEditComponent implements OnInit {
   }
 
   // sets up the get request by allowing us to pass the id in as a value.
-  // also allows us to pass the id already stored in the params value from the snapshot. 
+  // also allows us to pass the id already stored in the params value from the snapshot.
   getBusiness(id) {
     this.http.get('/business/' + id).subscribe(data => {
       this.business = data;
@@ -35,5 +35,4 @@ export class BusinessEditComponent implements OnInit {
       }
       );
   }
-
 }

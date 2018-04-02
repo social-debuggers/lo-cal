@@ -1,6 +1,8 @@
+import { BusinessService } from './../../service/business.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Business } from '../../models/Business';
 
 @Component({
   selector: 'app-business-detail',
@@ -9,27 +11,24 @@ import { ActivatedRoute, Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class BusinessDetailComponent implements OnInit {
-  business = {};
+  business: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private router: Router, private route: ActivatedRoute, private businessService: BusinessService) { }
 
   ngOnInit() {
     this.getBusinessDetail(this.route.snapshot.params['id']);
   }
 
-  getBusinessDetail(id) {
-    this.http.get('/business/' + id).subscribe(data => {
-      this.business = data;
-    });
+  getBusinessDetail(id: string) {
+    this.businessService.getBusiness(id)
+      .subscribe((data: Business) => this.business = data);
   }
 
-  deleteBusiness(id) {
-    this.http.delete('/business/' + id)
-      .subscribe(res => {
-        this.router.navigate(['/business']);
-      }, (err) => {
-        console.log(err);
-      }
-      );
+  deleteBusiness(id: string) {
+    this.businessService.deleteBusiness(id)
+    .subscribe((res: void) => {
+      this.router.navigate(['/business']);
+      },
+      (err) => console.log(err));
   }
 }

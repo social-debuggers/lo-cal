@@ -7,9 +7,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('./src/app/auth/config/database');
-const auth = require('./src/app/routes/local');
-const business = require ('./src/app/routes/business');
+const config = require('./config/database');
+const auth = require('./routes/local');
+const business = require ('./routes/business');
 const app = express();
 
 // create a connection to mongoDB

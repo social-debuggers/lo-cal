@@ -1,29 +1,24 @@
+import { BusinessService } from './../../service/business.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Business } from '../../models/Business';
 
 @Component({
   selector: 'app-business-create',
   templateUrl: './business-create.component.html',
   styleUrls: ['./business-create.component.css']
 })
-export class BusinessCreateComponent implements OnInit {
-  business = {};
+export class BusinessCreateComponent {
+  business: any = {};
 
-  constructor(private http: HttpClient, private router: Router) { }
-
-  ngOnInit() {
-  }
+  constructor(private businessService: BusinessService, private router: Router) { }
 
   saveBusiness() {
-   this.business = this.http.post('/business', this.business)
-      .subscribe(res => {
-        const id = res['_id'];
-        this.router.navigate(['/business-detail', id]);
-      }, (err) => {
-        console.log(err);
-      }
-      );
+   this.businessService.insertBusiness(this.business)
+    .subscribe((res: Business) => {
+       this.router.navigate(['/business']);
+       },
+       (err) => console.log(err));
   }
-
 }

@@ -2,17 +2,25 @@
   <h1>Edit Business</h1>
   <div class="row">
     <div class="col-md-6">
-      <form (ngSubmit)="updateBusiness()" #businessForm="ngForm">
+      <form (ngSubmit)="updateBusiness(business._id)" #businessForm="ngForm">
         <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" class="form-control" [(ngModel)]="business.name" name="name" required>
+          <label for="title">Title:</label>
+          <input type="text" class="form-control" [(ngModel)]="business.name" name="name"  required>
         </div>
         <div class="form-group">
-          <label for="name">Address</label>
+          <label for="image">Image</label>
+          <input type="text" class="form-control" [(ngModel)]="business.image" name="story" required>
+        </div>
+        <div class="form-group">
+          <label for="deals">Deals</label>
+          <input type="text" class="form-control" [(ngModel)]="business.deals" name="story" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
           <input type="text" class="form-control" [(ngModel)]="business.address" name="address" required>
         </div>
         <div class="form-group">
-          <label for="name">Story</label>
+          <label for="story">Story</label>
           <input type="text" class="form-control" [(ngModel)]="business.story" name="story" required>
         </div>
         <div class="form-group">

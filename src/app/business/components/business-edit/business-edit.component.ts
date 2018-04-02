@@ -1,6 +1,8 @@
+import { BusinessService } from './../../service/business.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Business } from '../../models/Business';
 
 @Component({
   selector: 'app-business-edit',
@@ -8,31 +10,26 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./business-edit.component.css']
 })
 export class BusinessEditComponent implements OnInit {
-  business = {};
+  business: any = {};
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private businessService: BusinessService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getBusiness(this.route.snapshot.params['id']);
+    this.getBusinessDetails(this.route.snapshot.params['id']);
   }
 
   // sets up the get request by allowing us to pass the id in as a value.
   // also allows us to pass the id already stored in the params value from the snapshot.
-  getBusiness(id) {
-    this.http.get('/business/' + id).subscribe(data => {
-      this.business = data;
-    });
+  getBusinessDetails(id: string) {
+    this.businessService.getBusiness(id)
+    .subscribe((data: Business) =>
+    this.business = data);
   }
-// TODO: FIX update business route
-  updateBusiness(id, data) {
-    this.http.put('/business/' + id, data)
-      .subscribe(res => {
-        // tslint:disable-next-line:no-shadowed-variable
-        const id = res['_id'];
-        this.router.navigate(['/business-details', id]);
-      }, (err) => {
-        console.log(err);
-      }
-      );
+
+ updateBusiness(id: string) {
+    this.businessService.updateBusiness(id, this.business)
+      .subscribe((res: void) =>
+      this.router.navigate([`/business`]),
+      (err) => console.log(err));
   }
 }

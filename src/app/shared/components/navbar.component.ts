@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -13,9 +14,14 @@ export class NavbarComponent {
 
     burgerSwitch: boolean;
 
-    constructor() { }
+    constructor(private router: Router) { }
 
     toggleBurger() {
         this.burgerSwitch = !this.burgerSwitch;
+    }
+
+    logOut() {
+        localStorage.removeItem('jwtToken');
+        this.router.navigate(['login']);
     }
 }

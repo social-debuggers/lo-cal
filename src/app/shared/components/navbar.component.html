@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io" target="_blank">
+            <a class="navbar-item" routerLink="/" target="_blank">
                 <img src="../../../assets/pics/lo-cal.png" alt="Logo">
             </a>
             <span class="navbar-burger burger" data-target="navbarMenu" [class.is-active]="burgerSwitch" (click)="toggleBurger()">
@@ -15,6 +15,8 @@
                 <a class="navbar-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }">Home</a>
                 <a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a>
                 <a class="navbar-item" routerLink="/signup" routerLinkActive="active">Signup</a>
+                <a class="navbar-item" routerLink='' (click)='logOut()' routerLinkActive="active">Logout</a>
+
             </div>
         </div>
     </div>

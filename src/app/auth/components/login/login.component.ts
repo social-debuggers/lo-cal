@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
@@ -8,7 +9,8 @@ import { of } from 'rxjs/observable/of';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+ // providers: [ AuthService ]
 })
 
 export class LoginComponent  {
@@ -17,10 +19,12 @@ export class LoginComponent  {
   data: any;
 
   constructor(
-    private http: HttpClient,
-    private router: Router) { }
+    private authService: AuthService,
+    private router: Router,
+    private http: HttpClient) { }
 
   login() {
+   // return this.authService.login();
     this.http.post('/login', this.loginData).subscribe(resp => {
       this.data = resp;
       localStorage.setItem('jwtToken', this.data.token);
@@ -30,3 +34,4 @@ export class LoginComponent  {
     });
   }
 }
+

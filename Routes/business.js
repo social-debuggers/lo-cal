@@ -53,6 +53,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), function (req
         console.log(req.body);
         var newBusiness = new Business({
             title: req.body.title,
+            image: req.body.image,
+            deals: req.body.deals,
             address: req.body.address,
             story: req.body.story
         });
@@ -68,7 +70,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), function (req
     }
 });
 
-// // MIDDLEWARE:  Gets list of business's for any given user
+// // MIDDLEWARE:  Gets list of business's for any given user -- for user profile
 // router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
 //     var token = getToken(req.headers);
 //     if (token) {
@@ -81,18 +83,18 @@ router.post('/', passport.authenticate('jwt', { session: false }), function (req
 //     }
 // });
 
-// //parses authorization token form request headers
-// getToken = function (headers) {
-//     if (headers && headers.authorization) {
-//         var parted = headers.authorization.split('');
-//         if (parted.length === 2) {
-//             return parted[1];
-//         } else {
-//             return null;
-//         }
-//     } else {
-//         return null;
-//     }
-// };
+//parses authorization token form request headers
+getToken = function (headers) {
+    if (headers && headers.authorization) {
+        var parted = headers.authorization.split('');
+        if (parted.length === 2) {
+            return parted[1];
+        } else {
+            return null;
+        }
+    } else {
+        return null;
+    }
+};
 
 module.exports = router;

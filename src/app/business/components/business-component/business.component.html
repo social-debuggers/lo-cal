@@ -9,7 +9,7 @@
     <p>
     </p>
   </div>
-  <div class="row">
+  <div class="row"> 
     <div class="col-lg-12">
     </div>
   </div>
@@ -20,6 +20,9 @@
       <img src="{{b.image}}" name="image">
       <div class="caption">
         <label > {{b.name}}</label>
+      </div>
+      <div class="caption">
+        <label > {{b.story | slice:0:30}}...</label>
       </div>
       <p>
         <a [routerLink]="['/business-detail', b._id]" class="btn btn-primary">More Info</a>

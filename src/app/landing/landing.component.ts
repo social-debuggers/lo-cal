@@ -1,8 +1,6 @@
+import { Component } from '@angular/core';
+
 import { PostService } from './../services/post.service';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-landing',

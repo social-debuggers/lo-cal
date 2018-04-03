@@ -6,7 +6,7 @@ import { Business } from '../../models/Business';
 @Component({
   selector: 'app-business',
   templateUrl: './business.component.html',
-  styleUrls: ['./business.component.css']
+  styleUrls: ['./business.component.css'],
 })
 export class BusinessComponent implements OnInit {
   business: any;

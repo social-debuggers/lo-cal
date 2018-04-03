@@ -4,6 +4,7 @@ import { User } from '../auth/models/User';
 import { Router, RouterLink } from '@angular/router';
 
 @Injectable()
+
 export class AuthService {
     isLoggedin = false;
     redirectUrl: string;

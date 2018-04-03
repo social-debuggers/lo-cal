@@ -11,7 +11,7 @@ import { Business } from '../../models/Business';
   encapsulation: ViewEncapsulation.None
 })
 export class BusinessDetailComponent implements OnInit {
-  business: any;
+  business: any = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private businessService: BusinessService) { }
 

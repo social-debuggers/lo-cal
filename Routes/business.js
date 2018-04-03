@@ -14,7 +14,6 @@ router.get('/', function (req, res, next) {
 
 });
 
-
 /* GET SINGLE BUSINESS BY ID */
 router.get('/:id', function (req, res, next) {
     Business.findById(req.params.id, function (err, post) {
@@ -69,31 +68,31 @@ router.post('/', passport.authenticate('jwt', { session: false }), function (req
     }
 });
 
-// MIDDLEWARE:  Gets list of business's for any given user
-router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
-    var token = getToken(req.headers);
-    if (token) {
-        Business.find(function (err, business) {
-            if (err) return next(err);
-            res.json(business);
-        });
-    } else {
-        return res.status(403).send({ success: false, msg: 'Unauthorized User.' });
-    }
-});
+// // MIDDLEWARE:  Gets list of business's for any given user
+// router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
+//     var token = getToken(req.headers);
+//     if (token) {
+//         Business.find(function (err, business) {
+//             if (err) return next(err);
+//             res.json(business);
+//         });
+//     } else {
+//         return res.status(403).send({ success: false, msg: 'Unauthorized User.' });
+//     }
+// });
 
-//parses authorization token form request headers
-getToken = function (headers) {
-    if (headers && headers.authorization) {
-        var parted = headers.authorization.split('');
-        if (parted.length === 2) {
-            return parted[1];
-        } else {
-            return null;
-        }
-    } else {
-        return null;
-    }
-};
+// //parses authorization token form request headers
+// getToken = function (headers) {
+//     if (headers && headers.authorization) {
+//         var parted = headers.authorization.split('');
+//         if (parted.length === 2) {
+//             return parted[1];
+//         } else {
+//             return null;
+//         }
+//     } else {
+//         return null;
+//     }
+// };
 
 module.exports = router;

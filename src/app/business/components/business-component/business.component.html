@@ -1,16 +1,49 @@
-<div class="container">
-    <table class="table">
-        <tbody>
-            <tr *ngFor="let b of business">
-                <td>{{ b.name }}</td>
-                <td>{{ b.address }}</td>
-                <td>{{ b.story }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <h1>Business List
-        <a [routerLink]="['/business-create']" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </a>
-    </h1>
+<h1>Welcome</h1>
+<header class="jumbotron">
+  <div class="container">
+    <h1>Welcome to Lo-Cal!</h1>
+    <p>Find local deals from Local Businesses!</p>
+    <p>
+      <a class="btn btn-primary btn-lg" [routerLink]="['/business-create']">Add a new Business</a>
+    </p>
+    <p>
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+    </div>
+  </div>
+</header>
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+  <div *ngFor="let b of business" class="col-md-3 col-sm-6">
+    <div class="thumbnail">
+      <img src="{{b.image}}" name="image">
+      <div class="caption">
+        <label > {{b.name}}</label>
+      </div>
+      <p>
+        <a [routerLink]="['/business-detail', b._id]" class="btn btn-primary">More Info</a>
+      </p>
+    </div>
+  </div>
 </div>
+<!-- 
+<div class="container">
+  <h1>Business List
+    <a [routerLink]="['/business-create']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </h1>
+  <ul>
+
+  </ul>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let b of business">
+        <td>{{ b.name }}</td>
+        <td>{{ b.address }}</td>
+        <td>{{ b.story }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->

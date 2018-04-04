@@ -1,4 +1,4 @@
-import { AuthService } from './../../auth.service';
+// import { AuthService } from './../../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
@@ -19,7 +19,7 @@ export class LoginComponent  {
   data: any;
 
   constructor(
-    private authService: AuthService,
+    // private authService: AuthService,
     private router: Router,
     private http: HttpClient) { }
 

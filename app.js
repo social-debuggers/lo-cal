@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ 'extended': 'false' }));
 // Angular DIST output folder.. looks for path of dist. 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(passport.initialize());
+// ROUTE Declerations
 app.use('/business', business);
 app.use('/', auth);
 

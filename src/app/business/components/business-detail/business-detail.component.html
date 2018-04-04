@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container">
   <h1>{{ business.name }}</h1>
   <dl class="list">
@@ -8,13 +9,13 @@
     <dd>{{ business.deals }}</dd>
     <dt>Story</dt>
     <dd>{{ business.story }}</dd>
-    </dl>
-    <dt>Address</dt>
-    <dd>{{ business.address }}</dd>
+  </dl>
+  <dt>Address</dt>
+  <dd>{{ business.address }}</dd>
   <div class="row">
     <div class="col-md-12">
       <a *ngIf="business" [routerLink]="['/business-edit', business?._id]" class="btn btn-success">EDIT</a>
-      <button class="btn btn-danger" type="button" (click)="deleteBusiness(business._id)">DELETE</button>
+        <button class="btn btn-danger" type="button" (click)="deleteBusiness(business._id)">DELETE</button>
     </div>
   </div>
 </div>

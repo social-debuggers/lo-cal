@@ -24,6 +24,9 @@
       <div class="caption">
         <label > {{b.story | slice:0:30}}...</label>
       </div>
+      <div class="caption">
+        <label > {{b.deals}}</label>
+      </div>
       <p>
         <a [routerLink]="['/business-detail', b._id]" class="btn btn-primary">More Info</a>
       </p>

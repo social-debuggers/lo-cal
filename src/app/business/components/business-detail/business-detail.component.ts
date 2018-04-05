@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth/service/auth.service';
 import { BusinessService } from './../../service/business.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,10 @@ import { Business } from '../../models/Business';
 export class BusinessDetailComponent implements OnInit {
   business: any = {};
 
-  constructor(private router: Router, private route: ActivatedRoute, private businessService: BusinessService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private businessService: BusinessService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.getBusinessDetail(this.route.snapshot.params['id']);

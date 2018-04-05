@@ -1,8 +1,8 @@
 <nav class="navbar">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item" routerLink="/" target="_blank">
-                <img src="../../../assets/pics/lo-cal.png" alt="Logo">
+            <a class="navbar-item" routerLink="/business" target="_blank">
+                <img src="../../../assets/pics/lo-cal-icon.png" width="120" height="40" alt="Logo">
             </a>
             <span class="navbar-burger burger" data-target="navbarMenu" [class.is-active]="burgerSwitch" (click)="toggleBurger()">
                 <span></span>
@@ -13,12 +13,14 @@
         <div id="navbarMenu" class="navbar-menu" [class.is-active]="burgerSwitch">
             <div class="navbar-end">
                 <a class="navbar-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }">Home</a>
-                <a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a>
-                <a class="navbar-item" routerLink="/signup" routerLinkActive="active">Signup</a>
+                <a *ngIf="!authService.isLoggedIn()" class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a>
+                <a *ngIf='!authService.isLoggedIn()'bclass="navbar-item" routerLink="/signup" routerLinkActive="active">Signup</a>
                 
-                <a class="navbar-item" routerLink='' (click)='logOut()' routerLinkActive="active">Logout</a>
+                <a *ngIf="authService.isLoggedIn()"class="navbar-item" routerLink='' (click)='logOut()' routerLinkActive="active">Logout</a>
 
             </div>
         </div>
     </div>
 </nav>
+
+ 

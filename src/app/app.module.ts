@@ -1,3 +1,4 @@
+import { AuthService } from './auth/service/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +30,7 @@ import { PostService } from './services/post.service';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [PostService, { provide: ErrorHandler, useClass: AppErrorHandler}],
+  providers: [PostService, { provide: ErrorHandler, useClass: AppErrorHandler }, AuthService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

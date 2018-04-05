@@ -9,8 +9,8 @@ export class AuthService {
     message = '';
     data: any;
 
-    constructor(private http: HttpClient, private router: Router) {
-    }
+    constructor(private http: HttpClient,
+                    private router: Router) {}
 
     login(user: User) {
         this.http.post('/login', user).subscribe(resp => {
@@ -22,7 +22,7 @@ export class AuthService {
         });
     }
 
-    isLoggedIn() {
+    isLoggedIn(): Boolean {
         if (localStorage.getItem('jwtToken') == null) {
             this.isLoggedin = false;
             return this.isLoggedin;

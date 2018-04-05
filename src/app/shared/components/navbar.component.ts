@@ -1,5 +1,7 @@
+import { AuthService } from './../../auth/service/auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../../auth/models/User';
 
 @Component({
     selector: 'app-navbar',
@@ -14,7 +16,9 @@ export class NavbarComponent {
 
     burgerSwitch: boolean;
 
-    constructor(private router: Router) { }
+    constructor(private router: Router,
+                private authService: AuthService,
+                ) { }
 
     toggleBurger() {
         this.burgerSwitch = !this.burgerSwitch;

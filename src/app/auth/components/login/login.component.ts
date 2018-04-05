@@ -10,7 +10,6 @@ import { of } from 'rxjs/observable/of';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  // providers: [ AuthService ]
 })
 
 export class LoginComponent  {

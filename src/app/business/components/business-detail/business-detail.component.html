@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
-<div class="container">
+<!-- <div class="container">
   <h1>{{ business.name }}</h1>
   <dl class="list">
     <dd>
-      <img src="{{ business.image }}">
+      <img src="{{ business.image }}" class="store-image">
     </dd>
     <dt>Deals</dt>
     <dd>{{ business.deals }}</dd>
@@ -18,4 +18,38 @@
         <button class="btn btn-danger" type="button" (click)="deleteBusiness(business._id)">DELETE</button>
     </div>
   </div>
-</div>
+</div> -->
+
+<hr>
+
+<main>
+  <div class="container store-content">
+    <div class="row" _ngcontent-c2="">
+      <div class="col-md-5 left-content">
+        <img src="{{ business.image }}" alt="store" class="store-image">
+      </div>
+      <div class="col-md-5 right-content offset-md-1">
+        <h1>{{ business.name }}</h1>
+
+        <h4>Story</h4>
+        <p>{{ business.story }}</p>
+
+        <h4>Address</h4>
+        <p>{{ business.address }}</p>
+
+        <div class="col-md-12 button-content">
+          <a *ngIf="business" [routerLink]="['/business-edit', business?._id]"
+            class="btn btn-success">EDIT</a>
+          <button class="btn btn-danger" type="button" (click)="deleteBusiness(business._id)">DELETE</button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <a *ngIf="business" [routerLink]="['/business-edit', business?._id]"
+          class="btn btn-success">EDIT</a>
+        <button class="btn btn-danger" type="button" (click)="deleteBusiness(business._id)">DELETE</button>
+      </div>
+    </div> -->
+  </div>
+</main>

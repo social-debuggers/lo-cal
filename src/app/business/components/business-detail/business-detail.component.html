@@ -12,7 +12,7 @@
   </dl>
   <dt>Address</dt>
   <dd>{{ business.address }}</dd>
-  <div class="row">
+  <div *ngIf="authService.isLoggedIn()" class="row">
     <div class="col-md-12">
       <a *ngIf="business" [routerLink]="['/business-edit', business?._id]" class="btn btn-success">EDIT</a>
         <button class="btn btn-danger" type="button" (click)="deleteBusiness(business._id)">DELETE</button>

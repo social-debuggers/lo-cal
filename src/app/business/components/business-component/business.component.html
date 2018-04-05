@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <header class="jumbotron">
-  <div class="container">
+  <div class="container text-center text-nowrap">
     <h1>Welcome to Lo-Cal!</h1>
     <p>Find local deals from Local Businesses!</p>
     <p>
@@ -14,22 +14,16 @@
     </div>
   </div>
 </header>
-<div class="row text-center" style="display:flex; flex-wrap: wrap;">
-  <div *ngFor="let b of business" class="col-md-3 col-sm-6">
-    <div class="thumbnail">
-      <img src="{{b.image}}" name="image">
-      <div class="caption">
-        <label > {{b.name}}</label>
-      </div>
-      <div class="caption">
-        <label > {{b.story | slice:0:30}}...</label>
-      </div>
-      <div class="caption">
-        <label > {{b.deals}}</label>
-      </div>
+<div class="container-fluid row spacing" style="float:none; margin: 0 auto;">
+  <div *ngFor="let b of business" class="card col-md-4 col-sm-6 pl-0 pr-0" >
+    <img class="card-img-top" style="width:100%; height:300px;" src="{{b.image}}" alt="Card image cap">
+    <div class="card-body m-3">
+      <h5 class="card-title">{{b.name}}</h5>
+      <p class="card-text">{{b.story | slice:0.30}}...</p>
       <p>
-        <a [routerLink]="['/business-detail', b._id]" class="btn btn-primary">More Info</a>
+        <a [routerLink]="['/business-detail',b._id]" class="btn btn-primary">More Info</a>
       </p>
+      
     </div>
   </div>
 </div>

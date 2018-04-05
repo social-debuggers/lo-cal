@@ -10,3 +10,12 @@
   padding: 9px;
 }
 
+.jumbotron{
+    background-image:url('/assets/pics/newImg.png');
+    color:white;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+  
+}
+

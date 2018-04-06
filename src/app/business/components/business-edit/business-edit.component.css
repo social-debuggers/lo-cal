@@ -1,0 +1,16 @@
+.forms-content {
+    background-color: rgba(239,239,239,0.7);
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+main {
+    padding: 15px;
+
+    /* background: url(../../../../assets/pics/shop.png) center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
